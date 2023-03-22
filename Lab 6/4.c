@@ -1,87 +1,51 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define int long long
-
-int isFull(int *q, int front, int rear, int length)
+void enqueue(int x, int *freq, int *q, int *rear)
 {
-    return (front == 0 && rear == length - 1 || (front == rear - 1));
+    freq[x]++;
+    q[(*rear)] = x;
+    (*rear)++;
 }
 
-int isEmpty(int front)
+void dequeue(int *u, int *freq, int *q, int *rear, int *front)
 {
-    return (front == -1);
-}
-
-void enqueue(int *q, int *front, int *rear, int length, int val)
-{
-    if (!isFull(q, *front, *rear, length))
+    while (freq[q[*front]] > 1)
     {
-        if (*front == -1)
+        freq[q[*front]]--;
+        (*front)++;
+    }
+    *u = (*rear > *front) ? q[*front] : -1;
+}
+
+int main()
+{
+    int n = 0;
+    int front = 0;
+    int rear = 0;
+    int u = 0;
+    scanf("%d", &n);
+    int *freq = calloc((n + 1), sizeof(int));
+    int *q = calloc(n, sizeof(int));
+
+    for (int i = 0; i < n; i++)
+    {
+        int x;
+        scanf("%d", &x);
+        if (freq[x] == 0)
         {
-            *front = 0;
-            *rear = 0;
-        }
-        else if (*rear == length - 1 && *front != 0)
-        {
-            *rear = 0;
+            enqueue(x, freq, q, &rear);
+            if (u == -1)
+            {
+                u = x;
+            }
         }
         else
         {
-            *rear += 1;
+            freq[x]++;
         }
-        q[*rear] = val;
+        dequeue(&u, freq, q, &rear, &front);
+        printf("%d ", u);
     }
-}
-
-void dequeue(int *q, int *front, int *rear, int length)
-{
-    if (!isEmpty(*front))
-    {
-        int x = q[*front];
-        if (*front == *rear)
-        {
-            *front = *rear = -1;
-        }
-        *front += 1;
-        if (*front == length)
-        {
-            *front = 0;
-        }
-        // return x;
-    }
-    // return -1;
-}
-
-void main()
-{
-    int n;
-    scanf("%lld", &n);
-    int *a = (int *)malloc(sizeof(int) * n);
-    for (int i = 0; i < n; i++)
-    {
-        scanf("%lld", &a[i]);
-    }
-    int *q = (int *)malloc(sizeof(int) * n);
-    int *freq = (int *)malloc(sizeof(int) * n);
-    for (int i = 0; i < n; i++)
-    {
-        freq[i] = 0;
-        q[i] = -1;
-    }
-    int front = -1;
-    int rear = -1;
-    for (int i = 0; i < n; i++)
-    {
-        freq[a[i]]++;
-        if (freq[a[i]] == 1)
-        {
-            enqueue(q, &front, &rear, n, a[i]);
-        }
-        else
-        {
-            dequeue(q, &front, &rear, n);
-        }
-        printf("%lld ", front == -1 ? -1 : q[front]);
-    }
+    return 0;
 }
