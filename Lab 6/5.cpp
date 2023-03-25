@@ -17,11 +17,11 @@ int main()
     }
     for (int i = 0; i < n; i++)
     {
-        if (!dq.empty() && dq.front() == i - k)
+        if (!dq.empty() && dq.front() == i - k) // removing element that should not be part of subarray
         {
             dq.pop_front();
         }
-        while (!dq.empty() && a[dq.back()] < a[i])
+        while (!dq.empty() && a[dq.back()] < a[i]) // removing all elements from queue that are less than current
         {
             dq.pop_back();
         }

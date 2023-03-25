@@ -3,15 +3,15 @@
 
 void enqueue(int *q, int x, int *front, int *rear)
 {
-    q[*rear] = x;
-    *rear += 1;
+    q[(*rear)] = x;
+    (*rear)++;
 }
 
-int dequeue(int *q, int *freq, int *front, int *rear, int *u)
+void dequeue(int *q, int *freq, int *front, int *rear, int *u)
 {
     while (freq[q[*front]] > 1)
     {
-        *front += 1;
+        (*front)++;
     }
     *u = *front < *rear ? q[*front] : -1;
 }

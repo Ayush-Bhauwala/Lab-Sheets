@@ -14,7 +14,7 @@ int main()
     }
     stack<ll> index;
     ll maxArea = -1;
-    for (ll i = 0; i < n; i++)
+    for (ll i = 0; i <= n; i++)
     {
         ll curHeight = i == n ? 0 : arr[i];
         while (!index.empty() && curHeight < arr[index.top()])

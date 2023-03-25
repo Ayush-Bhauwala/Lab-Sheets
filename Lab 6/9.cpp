@@ -13,7 +13,7 @@ int main()
     string temp = "";
     for (i; i < s.length(); i++)
     {
-        if (i == s.length() - 1 && temp.compare("") && s[i] != '/')
+        if (i == s.length() - 1 && s[i] != '/')
         {
             temp += s[i];
             if (!temp.compare(".."))
@@ -29,7 +29,7 @@ int main()
                 st.push(temp);
             }
         }
-        if (s[i] != '/')
+        else if (s[i] != '/')
         {
             temp += s[i];
         }
