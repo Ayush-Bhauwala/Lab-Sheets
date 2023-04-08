@@ -22,7 +22,7 @@ void merge(string a[], int l, int mid, int r)
     int k = l;
     while (i < n_l && j < n_r)
     {
-        if (left[i].compare(right[j]) > 0)
+        if ((left[i] + right[j]).compare(right[j] + left[i]) > 0)
         {
             a[k] = left[i];
             i++;
