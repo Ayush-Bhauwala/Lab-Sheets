@@ -60,24 +60,6 @@ void mergeSort(int a[], int l, int r)
 
 int binarySearch(int left, int right, int k, int a[], int i)
 {
-    // if (start > end)
-    // {
-    //     return -1;
-    // }
-
-    // int mid = (start + end) / 2;
-    // if (a[mid] - a[i] < k)
-    // {
-    //     return binarySearch(mid, end, k, a, i);
-    // }
-    // else if (a[mid - 1] - a[i] < k)
-    // {
-    //     return mid;
-    // }
-    // else
-    // {
-    //     return binarySearch(start, mid, k, a, i);
-    // }
     if (left > right)
     {
         return -1;
