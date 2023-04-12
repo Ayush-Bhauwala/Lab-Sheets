@@ -1,7 +1,6 @@
 #include <iostream>
 #include <unordered_map>
 #include <vector>
-#include <algorithm>
 
 using namespace std;
 
@@ -15,9 +14,9 @@ int main()
     unordered_map<int, unordered_map<int, int>> mat1;
     for (int i = 0; i < p; i++)
     {
-        int row, col, val;
-        cin >> row >> col >> val;
-        mat1[row][col] = val;
+        int row, col, ele;
+        cin >> row >> col >> ele;
+        mat1[row][col] = ele;
     }
 
     int q;
@@ -25,11 +24,11 @@ int main()
     unordered_map<int, unordered_map<int, int>> mat2;
     for (int i = 0; i < q; i++)
     {
-        int row, col, val;
-        cin >> row >> col >> val;
-        mat2[row][col] = val;
+        int row, col, ele;
+        cin >> row >> col >> ele;
+        mat2[row][col] = ele;
     }
-    cout << "\n";
+
     unordered_map<int, unordered_map<int, int>> mat3;
     for (int i = 1; i <= m; i++)
     {
@@ -42,10 +41,10 @@ int main()
                 {
                     sum += mat1[i][l] * mat2[l][j];
                 }
-            }
-            if (sum != 0)
-            {
-                mat3[i][j] = sum;
+                if (sum != 0)
+                {
+                    mat3[i][j] = sum;
+                }
             }
         }
     }
@@ -55,23 +54,20 @@ int main()
     {
         r += row.second.size();
     }
-    cout << r << endl;
-    // cout << mat3.size() << endl;
+    cout << r << "\n";
 
     vector<pair<pair<int, int>, int>> non_zero;
     for (auto row : mat3)
     {
-        for (auto elem : row.second)
+        for (auto ele : row.second)
         {
-            non_zero.push_back({{row.first, elem.first}, elem.second});
+            if (ele.second != 0)
+                non_zero.push_back({{row.first, ele.first}, ele.second});
         }
     }
-    // sort(non_zero.begin(), non_zero.end());
 
-    for (auto elem : non_zero)
+    for (auto ele : non_zero)
     {
-        cout << elem.first.first << " " << elem.first.second << " " << elem.second << endl;
+        cout << ele.first.first << ele.first.second << ele.second << "\n";
     }
-
-    return 0;
 }
