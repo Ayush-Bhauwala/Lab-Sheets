@@ -1,0 +1,7 @@
+{
+  "cmake.configureOnOpen": false,
+  "files.associations": {
+    "queue": "cpp",
+    "unordered_map": "cpp"
+  }
+}
