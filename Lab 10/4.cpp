@@ -1,71 +1,57 @@
 #include <iostream>
-#include <unordered_map>
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 
-int findMin(int arr[], int start, int end)
+vector<int> pancakeSort(vector<int> A)
 {
-    int min = 0;
-    for (int i = start; i <= end; i++)
+    vector<int> res;
+    int x, i;
+    for (x = A.size(); x > 0; --x)
     {
-        if (arr[i] < min)
-            min = arr[i];
+        for (i = 0; A[i] != x; ++i)
+            ;
+        reverse(A.begin(), A.begin() + i + 1);
+        res.push_back(i + 1);
+        reverse(A.begin(), A.begin() + x);
+        res.push_back(x);
     }
-    return min;
-}
-
-void reverseArray(int arr[], int start, int end)
-{
-    int mid = (start + end) / 2;
-    for (int i = start; i <= mid; i++)
+    vector<int> ans;
+    for (int i = 0; i < res.size() / 2; i++)
     {
-        int temp = arr[i];
-        arr[i] = arr[end - i];
-        arr[end - i] = temp;
+        if (res[2 * i] == res[2 * i + 1])
+        {
+            continue;
+        }
+        else
+        {
+            if (res[2 * i] != 1)
+                ans.push_back(res[2 * i]);
+            if (res[2 * i + 1] != 1)
+                ans.push_back(res[2 * i + 1]);
+        }
     }
-    // cout << "\n";
-    // for (int i = 0; i <= end; i++)
-    // {
-    //     cout << arr[i] << " ";
-    // }
-    // cout << "\n";
+    return ans;
 }
 
 int main()
 {
     int n;
     cin >> n;
-    int arr[n];
-    unordered_map<int, int> mp;
+    vector<int> arr;
     for (int i = 0; i < n; i++)
     {
-        cin >> arr[i];
-        mp[arr[i]] = i;
+        int x;
+        cin >> x;
+        arr.push_back(x);
     }
-    int k = 0;
-    vector<int> ks;
-    for (int i = n - 1; i >= 0; i--)
+    vector<int> ans = pancakeSort(arr);
+    cout << ans.size() << "\n";
+    for (int i = 0; i < ans.size(); i++)
     {
-        int num = i + 1;
-        if (arr[num - 1] != num)
-        {
-            if (index != 0)
-            {
-                reverseArray(arr, 0, index);
-                ks.push_back(index + 1);
-            }
-            if (num != 1)
-            {
-                reverseArray(arr, 0, num - 1);
-                ks.push_back(num);
-            }
-        }
+        cout << ans[i] << " ";
     }
-    cout << ks.size() << "\n";
-    for (int i = 0; i < ks.size(); i++)
-    {
-        cout << ks[i] << " ";
-    }
+
     return 0;
 }

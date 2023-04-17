@@ -3,6 +3,8 @@
   "files.associations": {
     "queue": "cpp",
     "unordered_map": "cpp",
-    "iostream": "cpp"
+    "iostream": "cpp",
+    "xutility": "cpp",
+    "vector": "cpp"
   }
 }
